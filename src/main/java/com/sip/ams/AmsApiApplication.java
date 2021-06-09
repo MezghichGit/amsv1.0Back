@@ -3,22 +3,23 @@ package com.sip.ams;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.sip.ams.services.FilesStorageService;
 
-import javax.annotation.Resource;
 
-import org.springframework.boot.CommandLineRunner;
+
+import java.io.File;
+
+
+
 
 @SpringBootApplication
-public class AmsApiApplication implements CommandLineRunner {
-	 @Resource
-	  FilesStorageService storageService;
+public class AmsApiApplication {
+	
+	public static String uploadDirectory =
+			System.getProperty("user.dir")+"/src/main/resources/static/uploads";
+
 	public static void main(String[] args) {
+		new File(uploadDirectory).mkdir();
 		SpringApplication.run(AmsApiApplication.class, args);
 	}
-	@Override
-	  public void run(String... arg) throws Exception {
-	    storageService.deleteAll();
-	    storageService.init();
-	  }
+
 }
